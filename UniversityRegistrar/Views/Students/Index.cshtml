@@ -1,0 +1,15 @@
+@{
+  Layout = "_Layout";
+}
+
+@using UniversityRegistrar.Models;
+
+<ul>
+  @foreach (Student student in Model)
+  {
+    <li>@Html.ActionLink($"{student.Name}", "Details", new { id = student.StudentId })</li>
+  }
+</ul>
+
+<p>@Html.ActionLink("Add New Student", "Create")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

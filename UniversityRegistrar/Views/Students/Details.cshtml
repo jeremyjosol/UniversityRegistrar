@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+
+@model UniversityRegistrar.Models.Student;
+@using UniversityRegistrar.Models;
+@using System.Collections.Generic;
+
+<h2>Student Info:</h2>
+<hr />
+@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+
+@if(Model.JoinEntities.Count == 0)
+{
+  <p>This student currently has no courses on record.</p>
+}
+else
+{
+  @foreach(Student student in Model.Students)
+  {
+    @if (student.JoinEntities.Count == 0)
+    {
+
+    }
+  }
+}
+
