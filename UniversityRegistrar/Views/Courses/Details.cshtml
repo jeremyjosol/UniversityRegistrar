@@ -11,3 +11,10 @@
 <h3>@Html.DisplayNameFor(model => model.CourseName): @Html.DisplayFor(model => model.CourseName)</h3>
 <h3>@Html.DisplayNameFor(model => model.CourseNumber): @Html.DisplayFor(model => model.CourseNumber)</h3>
 
+@if (Model.JoinEntities.Count == 0)
+{
+  <p></p>
+}
+<br/>
+<p>@Html.ActionLink("Add a Student", "AddStudent", new { id = Model.CourseId })</p>
+<p>@Html.ActionLink("Back to Courses", "Index")</p>
