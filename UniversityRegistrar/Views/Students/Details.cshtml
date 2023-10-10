@@ -9,6 +9,8 @@
 <h2>Student Info:</h2>
 <hr />
 @Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+<br/>
+@Html.DisplayNameFor(model => model.Department.Name): @Html.DisplayFor(model => model.Department.Name)
 
 @if(Model.JoinEntities.Count == 0)
 {

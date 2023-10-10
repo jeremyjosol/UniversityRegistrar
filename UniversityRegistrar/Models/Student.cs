@@ -15,5 +15,10 @@ namespace UniversityRegistrar.Models
 
     // Collection Navigation Property
     public List<Enrollment> JoinEntities { get; set; }
+    // Foreign Key
+    [Range(1, int.MaxValue, ErrorMessage = "* You must add a student to a department.")]
+    public int DepartmentId { get; set; }
+    // Reference Navigation Property
+    public Department Department { get; set; }
   }
 }

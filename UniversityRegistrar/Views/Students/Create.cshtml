@@ -10,21 +10,24 @@
 <div class="container">
   @using (Html.BeginForm())
   {
-    @Html.LabelFor(model => model.Name)
-    <br/>
+    <h4>@Html.LabelFor(model => model.Name)</h4>
     @Html.TextBoxFor(model => model.Name)
     <br/>
     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-    @Html.Label("Enrollment Date")
-    <br />
+    <h4>@Html.Label("Enrollment Date")</h4>
     @Html.TextBoxFor(model => model.EnrollmentDate, new { type = "date" })
     <br/>
     @Html.ValidationMessageFor(model => model.EnrollmentDate, "", new { @class = "text-danger" })
+    <h4>@Html.Label("Choose a Department")</h4>
+    @Html.DropDownList("DepartmentId")
+    <br/>
+    @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
     <br />
     <input type="submit" value="Submit" class="btn btn-primary"/>
   }
 </div>
 
 <br/>
-
-<h5>@Html.ActionLink("Back to Students", "Index")</h5>
+<div class="container">
+  <h5>@Html.ActionLink("Back to Students", "Index")</h5>
+</div>

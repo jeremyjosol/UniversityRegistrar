@@ -10,6 +10,8 @@
 <hr />
 <h3>@Html.DisplayNameFor(model => model.CourseName): @Html.DisplayFor(model => model.CourseName)</h3>
 <h3>@Html.DisplayNameFor(model => model.CourseNumber): @Html.DisplayFor(model => model.CourseNumber)</h3>
+<h3>@Html.DisplayNameFor(model => model.Department.Name): @Html.DisplayFor(model => model.Department.Name)</h3>
+<hr />
 
 @if (Model.JoinEntities.Count == 0)
 {
@@ -17,11 +19,15 @@
 }
 else
 {
+  <h4>Enrolled Students</h4>
+  <hr />
   @foreach(Enrollment join in Model.JoinEntities)
   {
+    
     <li>@Html.ActionLink(join.Student.Name, "Details", "Students", new { id = join.Student.StudentId })</li>
   }
 }
 <br/>
 <p>@Html.ActionLink("Add a Student", "AddStudent", new { id = Model.CourseId })</p>
+<p>@Html.ActionLink("Remove Course", "Delete", new { id = Model.CourseId })</p>
 <p>@Html.ActionLink("Back to Courses", "Index")</p>

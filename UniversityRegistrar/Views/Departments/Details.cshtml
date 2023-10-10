@@ -1,0 +1,38 @@
+@{
+  Layout = "_Layout";
+}
+
+@model UniversityRegistrar.Models.Department;
+@using UniversityRegistrar.Models;
+@using System.Collections.Generic;
+
+<h2>Department Info:</h2>
+<hr />
+@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+
+
+<h5>Students:</h5>
+@if(Model.Students.Count == 0)
+{
+  <p>This department currently has no students enrolled.</p>
+}
+<ul>
+@foreach(Student student in Model.Students)
+{
+  <li>@student.Name</li>
+}
+</ul>
+<h5>Courses:</h5>
+@if (Model.Courses.Count == 0)
+{
+  <p>This department currently has no classes.</p>
+}
+<ul>
+@foreach(Course course in Model.Courses)
+{
+  <li>@course.CourseName</li>
+}
+</ul>
+
+<br/>
+<p>@Html.ActionLink("Back to Departments", "Index")</p>

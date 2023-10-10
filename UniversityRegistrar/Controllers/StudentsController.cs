@@ -24,7 +24,7 @@ namespace UniversityRegistrar.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.StudentId = new SelectList(_db.Students, "StudentId", "Name");
+      ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Name");
       return View();
     }
 
@@ -33,15 +33,18 @@ namespace UniversityRegistrar.Controllers
     {
       if(!ModelState.IsValid)
       {
+        ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Name");
         return View(student);
       }
       _db.Students.Add(student);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
     public ActionResult Details(int id)
     {
       Student thisStudent = _db.Students
+                                .Include(student => student.Department)
                                 .Include(student => student.JoinEntities)
                                 .ThenInclude(student => student.Course)
                                 .FirstOrDefault(student => student.StudentId == id);

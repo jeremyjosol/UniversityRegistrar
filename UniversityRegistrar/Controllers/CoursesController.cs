@@ -24,6 +24,7 @@ namespace UniversityRegistrar.Controllers
 
     public ActionResult Create()
     {
+    ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Name");
     return View();
     }
 
@@ -32,6 +33,7 @@ namespace UniversityRegistrar.Controllers
     {
       if (!ModelState.IsValid)
       {
+        ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "Name");
         return View(course);
       }
       _db.Courses.Add(course);
@@ -42,8 +44,9 @@ namespace UniversityRegistrar.Controllers
     public ActionResult Details(int id)
     {
       Course thisCourse = _db.Courses
+                              .Include(course => course.Department)
                               .Include(course => course.JoinEntities)
-                              .ThenInclude(course => course.Student)
+                              .ThenInclude(join => join.Student)
                               .FirstOrDefault(course => course.CourseId == id);
       return View(thisCourse);
     }
@@ -68,6 +71,21 @@ namespace UniversityRegistrar.Controllers
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = course.CourseId });
+    }
+
+    public ActionResult Delete(int id)
+    {
+      Course thisCourse = _db.Courses.FirstOrDefault(course => course.CourseId == id);
+      return View(thisCourse);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      Course thisCourse = _db.Courses.FirstOrDefault(course => course.CourseId == id);
+      _db.Courses.Remove(thisCourse);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }
