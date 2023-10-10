@@ -16,12 +16,13 @@
 }
 else
 {
+  <h5>Enrolled Courses:</h5>
+  <ul>
   @foreach(Enrollment join in Model.JoinEntities)
   {
-    <ul>
       <li>@join.Course.CourseName</li>
-    </ul>
   }
+  </ul>
 }
 
 <br/>

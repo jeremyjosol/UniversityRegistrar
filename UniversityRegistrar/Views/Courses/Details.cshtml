@@ -13,7 +13,14 @@
 
 @if (Model.JoinEntities.Count == 0)
 {
-  <p></p>
+  <p>There are currently no students enrolled.</p>
+}
+else
+{
+  @foreach(Enrollment join in Model.JoinEntities)
+  {
+    <li>@Html.ActionLink(join.Student.Name, "Details", "Students", new { id = join.Student.StudentId })</li>
+  }
 }
 <br/>
 <p>@Html.ActionLink("Add a Student", "AddStudent", new { id = Model.CourseId })</p>

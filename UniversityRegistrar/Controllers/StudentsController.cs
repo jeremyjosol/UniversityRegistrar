@@ -31,6 +31,10 @@ namespace UniversityRegistrar.Controllers
     [HttpPost]
     public ActionResult Create(Student student)
     {
+      if(!ModelState.IsValid)
+      {
+        return View(student);
+      }
       _db.Students.Add(student);
       _db.SaveChanges();
       return RedirectToAction("Index");

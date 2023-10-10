@@ -7,13 +7,18 @@
 <h4>Add a new course</h4>
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.CourseName)
+  <h4>Course Name</h4>
   @Html.TextBoxFor(model => model.CourseName)
-
-  @Html.LabelFor(model => model.CourseNumber)
+  <br/>
+  @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
+  <br/>
+  <h4>Course Number</h4>
   @Html.TextBoxFor(model => model.CourseNumber)
-
+  <br/>
+  @Html.ValidationMessageFor(model => model.CourseNumber, "", new { @class = "text-danger" })
+  <br/>
+  <br/>
   <input type="submit" value="Add new Course" class="btn btn-primary" />
 }
-
+  <br/>
   <p>@Html.ActionLink("Show all Courses", "Index")</p>
