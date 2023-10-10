@@ -38,9 +38,26 @@ DROP TABLE IF EXISTS `Courses`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Courses` (
   `CourseId` int NOT NULL AUTO_INCREMENT,
-  `CourseName` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `CourseNumber` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  PRIMARY KEY (`CourseId`)
+  `CourseName` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `CourseNumber` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `DepartmentId` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`CourseId`),
+  KEY `IX_Courses_DepartmentId` (`DepartmentId`),
+  CONSTRAINT `FK_Courses_Departments_DepartmentId` FOREIGN KEY (`DepartmentId`) REFERENCES `Departments` (`DepartmentId`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Departments`
+--
+
+DROP TABLE IF EXISTS `Departments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Departments` (
+  `DepartmentId` int NOT NULL AUTO_INCREMENT,
+  `Name` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`DepartmentId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -60,7 +77,7 @@ CREATE TABLE `Enrollments` (
   KEY `IX_Enrollments_StudentId` (`StudentId`),
   CONSTRAINT `FK_Enrollments_Courses_CourseId` FOREIGN KEY (`CourseId`) REFERENCES `Courses` (`CourseId`) ON DELETE CASCADE,
   CONSTRAINT `FK_Enrollments_Students_StudentId` FOREIGN KEY (`StudentId`) REFERENCES `Students` (`StudentId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,10 +89,13 @@ DROP TABLE IF EXISTS `Students`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Students` (
   `StudentId` int NOT NULL AUTO_INCREMENT,
-  `Name` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `Name` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `EnrollmentDate` datetime(6) NOT NULL,
-  PRIMARY KEY (`StudentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `DepartmentId` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`StudentId`),
+  KEY `IX_Students_DepartmentId` (`DepartmentId`),
+  CONSTRAINT `FK_Students_Departments_DepartmentId` FOREIGN KEY (`DepartmentId`) REFERENCES `Departments` (`DepartmentId`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -87,4 +107,4 @@ CREATE TABLE `Students` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-10 10:35:56
+-- Dump completed on 2023-10-10 16:18:09
