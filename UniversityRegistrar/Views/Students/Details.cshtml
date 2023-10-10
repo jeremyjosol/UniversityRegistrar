@@ -16,12 +16,12 @@
 }
 else
 {
-  @foreach(Student student in Model.Students)
+  @foreach(Enrollment join in Model.JoinEntities)
   {
-    @if (student.JoinEntities.Count == 0)
-    {
-
-    }
+    <ul>
+      <li>@join.Course.CourseName</li>
+    </ul>
   }
 }
+
 
