@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 
-<h2>Students</h2>
+<h1>Students</h1>
 <hr /> 
 
 @using UniversityRegistrar.Models;
@@ -11,12 +11,12 @@
   <ul>
     @foreach (Student student in Model)
     {
-      <li>@Html.ActionLink($"{student.Name}", "Details", new { id = student.StudentId })</li>
+      <li><h4>@Html.ActionLink($"{student.Name}", "Details", new { id = student.StudentId })</h4></li>
     }
   </ul>
 </div>
 
 <div class="container">
-  <p>@Html.ActionLink("Add New Student", "Create")</p>
-  <p>@Html.ActionLink("Home", "Index", "Home")</p>
+  <h5>@Html.ActionLink("Add New Student", "Create")</h5>
+  <h5>@Html.ActionLink("Home", "Index", "Home")</h5>
 </div>

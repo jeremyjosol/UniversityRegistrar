@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 
-<h2>Courses</h2>
+<h1>Courses</h1>
 <hr />
 
 @using UniversityRegistrar.Models;
@@ -11,12 +11,25 @@
 {
   <p>There are currently no courses available!</p>
 }
-<u>
-  @foreach (Course course in Model)
-  {
-    <li>@Html.ActionLink(@course.CourseName, "Details", new { id = course.CourseId })</li>
-  }
-</u>
+<div class="container">
+  <ul>
+    @foreach (Course course in Model)
+    {
+      @using (Html.BeginForm("Delete", "Courses"))
+      {
+        <li>
+          <h4>
+            @Html.ActionLink(@course.CourseName, "Details", new { id = course.CourseId })
+            @Html.Hidden("id", @course.CourseId)
+            <input type="submit" value="X" class="btn btn-x btn-sm btn-outline-danger" />
+          </h4>
+        </li>
+      }
+    }
+  </ul>
+</div>
 
-<p>@Html.ActionLink("Add New Course", "Create")</p>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<div class="container">
+  <h5>@Html.ActionLink("Add New Course", "Create")</h5>
+  <h5>@Html.ActionLink("Home", "Index", "Home")</h5>
+</div>

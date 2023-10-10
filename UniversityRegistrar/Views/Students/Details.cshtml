@@ -6,11 +6,10 @@
 @using UniversityRegistrar.Models;
 @using System.Collections.Generic;
 
-<h2>Student Info:</h2>
+<h1>Student Info:</h1>
 <hr />
-@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
-<br/>
-@Html.DisplayNameFor(model => model.Department.Name): @Html.DisplayFor(model => model.Department.Name)
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+<h3>Department: @Html.DisplayFor(model => model.Department.Name)</h3>
 
 @if(Model.JoinEntities.Count == 0)
 {
@@ -18,15 +17,27 @@
 }
 else
 {
-  <h5>Enrolled Courses:</h5>
+  <h3>Enrolled Courses:</h3>
   <ul>
   @foreach(Enrollment join in Model.JoinEntities)
   {
-      <li>@join.Course.CourseName</li>
+        @using (Html.BeginForm("DeleteEnrollment", "Students"))
+        {
+          <li>
+            <h4>
+              @Html.ActionLink(@join.Course.CourseName, "Details", new { id = join.Course.CourseId })
+              @Html.Hidden("enrollmentId", @join.EnrollmentId)
+              <input type="submit" value="X" class="btn btn-sm btn-x btn-danger" />
+            </h4>
+          </li>
+        }
   }
   </ul>
 }
 
 <br/>
-<p>@Html.ActionLink("Add to Course", "AddCourse", new { id = Model.StudentId } )</p>
-<p>@Html.ActionLink("Back to Students", "Index")</p>
+<div class="container">
+<h5>@Html.ActionLink("Add to Course", "AddCourse", new { id = Model.StudentId } )</h5>
+<h5>@Html.ActionLink("Remove Student", "Delete", new { id = Model.StudentId })</h5>
+<h5>@Html.ActionLink("Back to Students", "Index")</h5>
+</div>

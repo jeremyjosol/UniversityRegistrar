@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 
-<h2>Departments</h2>
+<h1>Departments</h1>
 <hr />
 
 @using UniversityRegistrar.Models;
@@ -11,12 +11,16 @@
 {
   <p>There are currently no Departments on record.</p>
 }
-<ul>
-  @foreach (Department department in Model)
-  {
-    <li>@Html.ActionLink(@department.Name, "Details", new { id = department.DepartmentId })</li>
-  }
-</ul>
+<div class="container">
+  <ul>
+    @foreach (Department department in Model)
+    {
+      <li><h4>@Html.ActionLink(@department.Name, "Details", new { id = department.DepartmentId })</h4></li>
+    }
+  </ul>
+</div>
 
-<p>@Html.ActionLink("Add New Department", "Create")</p>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<div class="container">
+  <h5>@Html.ActionLink("Add New Department", "Create")</h5>
+  <h5>@Html.ActionLink("Home", "Index", "Home")</h5>
+</div>
