@@ -24,7 +24,7 @@ else
   @foreach(Enrollment join in Model.JoinEntities)
   {
     
-    <li>@Html.ActionLink(join.Student.Name, "Details", "Students", new { id = join.Student.StudentId })</li>
+    <h4><li>@Html.ActionLink(join.Student.Name, "Details", "Students", new { id = join.Student.StudentId })</li></h4>
   }
 }
 <br/>

@@ -1,14 +1,8 @@
-/* html {
-  text-align: center;
-} */
-
 .btn-danger, .btn-outline-danger {
   width: 30px;
   border-radius: 50px;
 }
 
-/* .btn-outline-danger {
-  width: 30px;
-  height: 18x;
-  border-radius: 50px;
-} */
+a {
+  text-decoration: none;
+}

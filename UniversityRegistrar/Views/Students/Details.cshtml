@@ -27,7 +27,7 @@ else
             <h4>
               @Html.ActionLink(@join.Course.CourseName, "Details", new { id = join.Course.CourseId })
               @Html.Hidden("enrollmentId", @join.EnrollmentId)
-              <input type="submit" value="X" class="btn btn-sm btn-x btn-danger" />
+              <input type="submit" value="X" class="btn btn-sm btn-x btn-outline-danger" />
             </h4>
           </li>
         }
